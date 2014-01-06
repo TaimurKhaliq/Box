@@ -4,7 +4,8 @@
   "description": "box media type prototype",
   "main": "server.js",
   "dependencies": {
-    "connect": "~2.12.0"
+    "connect": "~2.12.0",
+    "express": "~3.4.7"
   },
   "devDependencies": {},
   "scripts": {
