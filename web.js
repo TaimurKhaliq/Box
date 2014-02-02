@@ -10,15 +10,18 @@ server.listen(process.env.PORT || 5000);
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/test');
+
 var boxSchema = mongoose.Schema({
+    id: Schema.Types.ObjectId,
     name: String,
-    content: Array,
-    users: Array,
-    sessions: Array
+    hashTags: [{tag: String}],
+    liveSessions: [{sessionId: String}],
+    comments: [{body: String, date: Date, user: Schema.Types.ObjectId }],
+    date: { type: Date, default: Date.now },
+    status: Boolean,
+    age: {type: Number },
+    users: [{name: String, id: Schema.Types.ObjectId}]
 });
-
-var sessionId = "";
-
 
 var Box = mongoose.model('Box', boxSchema);
 
@@ -54,7 +57,7 @@ app.get('/createBox', function(req, res) {
 });
 
 function getBox(res, id){
-   var _res = res;
+    var _res = res;
     var _callBack = function(err, data) {
         if (err || data.length === 0){
             console.log("Failed to find box");
@@ -75,10 +78,6 @@ app.get('/box/:id', function(req, res){
 
 io.sockets.on('connection', function(socket){
     var hs = socket.handshake;
-
-    socket.on('createBox', function() {
-
-    });
 
     socket.on('getBoxData', function(){
         socket.emit('boxData', { data: [1,2,3,4,5]});
