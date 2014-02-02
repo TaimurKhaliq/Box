@@ -29,5 +29,13 @@
             console.log(data);
         });
 
+        $.ajax({
+            url: "/createBox",
+            success: function(data){
+                console.log("The box is:");
+                console.log(data);
+            }
+        });
+
     </script>
 </html>
