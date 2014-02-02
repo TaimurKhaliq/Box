@@ -1,13 +1,20 @@
 /** @jsx React.DOM */
 var inputBox = React.createClass({
-    addComment: function () {
-
+    value: "",
+    handleKeyPress: function(e) {
+        var code = e.keyCode || e.which;
+        if(code === 13) { //Enter keycode
+            $(document).trigger("commentAdded", [e.target.value ]);
+        }
+    },
+    openCommentMenu: function() {
+        $(document).trigger("openCommentMenu");
     },
     render: function() {
         return(
             <div className="box-input">
-                <textarea>Please fill an input</textarea>
-                <button onClick={this.addComment}>Enter</button>
+                <textarea onKeyPress={this.handleKeyPress}></textarea>
+                <span onClick={this.openCommentMenu}>+ arrow</span>
             </div>
         );
     }
