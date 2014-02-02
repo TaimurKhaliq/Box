@@ -40,15 +40,15 @@ io.set('authorization', function(data, accept){
     accept(null, true);
 });
 
-app.get('/createBox', function(req, res) {
-    var _box = new Box({name: 'test1', sessions: [sessionId]});
-    _box.save(function(err, _box){
-        if (err) {
-            console.log("Failed to save");
-        }
-        console.log("box saved successfully");
-    });
-});
+//app.get('/createBox', function(req, res) {
+//    var _box = new Box({name: 'test1', sessions: [sessionId]});
+//    _box.save(function(err, _box){
+//        if (err) {
+//            console.log("Failed to save");
+//        }
+//        console.log("box saved successfully");
+//    });
+//});
 
 function getBox(res, id){
    var _res = res;

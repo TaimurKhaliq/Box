@@ -29,4 +29,3 @@ var box = React.createClass({
     }
 });
 
-React.renderComponent(<box/>,document.getElementById("box"));
