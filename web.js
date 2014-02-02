@@ -12,8 +12,11 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/test');
 var boxSchema = mongoose.Schema({
     name: String,
+    content: Array,
+    users: Array,
     sessions: Array
 });
+
 var sessionId = "";
 
 
