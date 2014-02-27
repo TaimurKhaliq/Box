@@ -14,9 +14,8 @@ var boxSchema = mongoose.Schema({
     name: String,
     sessions: Array
 });
+
 var sessionId = "";
-
-
 var Box = mongoose.model('Box', boxSchema);
 
 app.configure(function () {
@@ -40,25 +39,27 @@ io.set('authorization', function(data, accept){
     accept(null, true);
 });
 
-//app.get('/createBox', function(req, res) {
-//    var _box = new Box({name: 'test1', sessions: [sessionId]});
-//    _box.save(function(err, _box){
-//        if (err) {
-//            console.log("Failed to save");
-//        }
-//        console.log("box saved successfully");
-//    });
-//});
+app.get('/createBox', function(req, res) {
+    var _name = req.query.name;
+    var _box = new Box({name: _name, sessions: [sessionId], id: new mongoose.Schema.ObjectId});
+    _box.save(function(err, _box){
+        if (err) {
+            console.log("Failed to save");
+        }
+        console.log("box saved successfully");
+    });
+});
 
 function getBox(res, id){
-   var _res = res;
+    var _res = res;
     var _callBack = function(err, data) {
         if (err || data.length === 0){
             console.log("Failed to find box");
-            _res.send("no box found");
+             _res.send("no box found");
         } else {
             console.log("box found");
-            _res.send(JSON.stringify(data));
+            console.log(data);
+            res.sendfile(__dirname + '/public/box/box.html');
         }
     }
 
@@ -74,7 +75,6 @@ io.sockets.on('connection', function(socket){
     var hs = socket.handshake;
 
     socket.on('createBox', function() {
-
     });
 
     socket.on('getBoxData', function(){

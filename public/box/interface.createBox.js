@@ -1,5 +1,5 @@
 /** @jsx React.DOM */
-var box = React.createClass({
+var createBox = React.createClass({
     getInitialState: function() {
         return {
             items : []
@@ -15,6 +15,11 @@ var box = React.createClass({
         });
     },
 
+    handleClick: function() {
+        homePageRouter.navigate("/openBox", {trigger: true});
+        var node = this.refs.boxName.getDomNode().val();
+    },
+
     componentWillUnmount: function() {
         $(document).unbind("commentAdded");
     },
@@ -22,8 +27,9 @@ var box = React.createClass({
     render: function() {
         return(
             <div className="box-content">
-                <container items={this.state.items} />
-                <inputBox />
+                <div className="name-input"><p>Box Name</p><input type="text" ref="boxName"></input></div>
+                <div className="name-input"><p>Tags</p><input type="text"></input></div>
+                <button className="center full-width" onClick={this.handleClick}>Launch</button>
             </div>
         );
     }

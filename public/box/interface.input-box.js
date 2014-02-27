@@ -12,9 +12,9 @@ var inputBox = React.createClass({
     },
     render: function() {
         return(
-            <div className="box-input">
-                <textarea onKeyPress={this.handleKeyPress}></textarea>
-                <span onClick={this.openCommentMenu}>+ arrow</span>
+            <div>
+                <button className="width-20 input-tab">+</button>
+                <input type="text" className="width-80 text-input" onKeyPress={this.handleKeyPress}></input>
             </div>
         );
     }

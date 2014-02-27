@@ -1,0 +1,47 @@
+.name-input p {
+  width: 30%;
+  display: inline-block;
+  box-sizing: border-box; }
+.name-input input {
+  width: 70%;
+  display: inline-block;
+  box-sizing: border-box; }
+
+.box-list {
+  padding: 0px; }
+
+.box-item {
+  list-style: none;
+  height: 50px;
+  border: 1px solid #DBDBDB;
+  margin-bottom: 3%;
+  position: relative;
+  background-color: #fff;
+  margin-right: 3%;
+  margin-left: 3%;
+  box-shadow: 0 3px 12px rgba(50, 50, 50, 0.1);
+  cursor: pointer; }
+  .box-item span {
+    position: absolute;
+    top: 35%;
+    line-height: 20px;
+    margin-left: 3%;
+    width: 60%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 13px; }
+  .box-item img {
+    max-width: 75px;
+    min-width: 75px;
+    max-height: 50px;
+    min-height: 50px;
+    box-shadow: 0 3px 12px rgba(50, 50, 50, 0.3); }
+
+.searchBoxButton {
+  background-color: #5E5AB9;
+  width: 100%;
+  border: 0px;
+  color: white;
+  box-sizing: border-box;
+  font-weight: bold; }

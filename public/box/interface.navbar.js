@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 var navbar = React.createClass({
     render: function() {
-        var boxTitle = "Test title";
+        var boxTitle = "";
         return(
             <div>
                 <span className="nav-title">
@@ -14,5 +14,3 @@ var navbar = React.createClass({
         );
     }
 });
-
-React.renderComponent(<navbar/>, document.getElementById("navbar"));
