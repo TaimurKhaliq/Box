@@ -12,34 +12,36 @@
 
 .box-item {
   list-style: none;
-  height: 50px;
-  border: 1px solid #DBDBDB;
-  margin-bottom: 3%;
+  height: 75px;
+  border-bottom: 1px dotted #ccc8c8;
+  margin-bottom: 1%;
   position: relative;
   background-color: #fff;
-  margin-right: 3%;
-  margin-left: 3%;
-  box-shadow: 0 3px 12px rgba(50, 50, 50, 0.1);
+  margin-right: 1%;
+  margin-left: 1%;
+  padding-top: 3px;
+  padding-bottom: 10px;
+  padding-left: 3px;
   cursor: pointer; }
   .box-item span {
-    position: absolute;
-    top: 35%;
     line-height: 20px;
     margin-left: 3%;
     width: 60%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    font-size: 13px; }
+    font-size: 13px;
+    font-weight: bold;
+    vertical-align: top; }
   .box-item img {
     max-width: 75px;
     min-width: 75px;
-    max-height: 50px;
-    min-height: 50px;
+    max-height: 75px;
+    min-height: 75px;
     box-shadow: 0 3px 12px rgba(50, 50, 50, 0.3); }
 
 .searchBoxButton {
-  background-color: #5E5AB9;
+  background-color: #0EB686;
   width: 100%;
   border: 0px;
   color: white;

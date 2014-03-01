@@ -4,13 +4,16 @@ html {
 body {
     height: 100%;
     position: relative;
-    background-color: #DDDDDD;
+    background-color: #EEEEEE;
     font-family: "Trebuchet MS";
 }
 
 button {
     display: block;
-    height: 35px;
+    height: 40px;
+    background-color: #0EB686;
+    color: white;
+    font-size: 15px;
 }
 
 .center {
@@ -39,7 +42,7 @@ button {
 
 .vertical-center {
     position: absolute;
-    top: 40%;
+    top: 50%;
     width: 100%;
 }
 

@@ -2,10 +2,13 @@ var express = require('express');
 var connect = require('connect');
 var app = express();
 var http = require('http');
+var https = require('https');
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 var SITE_SECRET = "keyboard cat";
 var connectUtils = connect.utils;
+var request = require("request");
+var querystring = require("querystring");
 server.listen(process.env.PORT || 5000);
 
 var mongoose = require('mongoose');
@@ -22,6 +25,7 @@ app.configure(function () {
     app.use(connect.cookieParser(SITE_SECRET));
     app.use(express.session({secret: SITE_SECRET, key: 'express.sid'}));
     app.use("/", express.static(__dirname + '/public'));
+    app.use(express.bodyParser());
 });
 
 io.set('authorization', function(data, accept){
@@ -48,6 +52,43 @@ app.get('/createBox', function(req, res) {
         }
         console.log("box saved successfully");
     });
+});
+
+app.post('/createEvent', function(req, res){
+    var ref = req.body.reference;
+    var summary = req.body.summary;
+    var duration = req.body.duration;
+    var language = req.body.language;
+
+    var postData = {
+        duration: duration,
+        reference: ref,
+        summary: summary
+    };
+
+    var body = querystring.stringify(postData);
+
+    var options = {
+        host: 'maps.googleapis.com',
+        port: 443,
+        path: '/maps/api/place/event/add/json?sensor=false&key=AIzaSyAjhVOUqyApek1tdeiyKaZOWdLk4EUYHlM',
+        method: 'POST',
+        headers: {
+            accept : '*/*',
+            'Content-Type' : 'application/json',
+            'Content-Length' : Buffer.byteLength(body)
+        }
+    };
+
+    var myReq = https.request(options, function(res){
+       res.setEncoding('utf8');
+       res.on('data', function(chunk){
+          console.log("body:" + chunk);
+       });
+    });
+
+    myReq.write(body);
+    myReq.end();
 });
 
 function getBox(res, id){

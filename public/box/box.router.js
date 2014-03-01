@@ -5,7 +5,8 @@ var homePageRouter = Backbone.Router.extend({
     "": "home",
     "createBox": "createBox",
     "openBox": "openBox",
-    "findBox": "findBox"
+    "findBox": "findBox",
+    "openNetwork": "openNetwork"
    },
 
    home: function() {
@@ -24,6 +25,9 @@ var homePageRouter = Backbone.Router.extend({
        React.renderComponent(<box />, document.getElementById("appContent"), function(){
            $(document).trigger("openBox", {data: node});
        });
+   },
+   openNetwork: function(){
+       React.renderComponent(<networkDetails />, document.getElementById("appContent"));
    }
 });
 
