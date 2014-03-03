@@ -1,44 +1,77 @@
 /** @jsx React.DOM */
 var networkDetails = React.createClass({
+   getInitialState: function(){
+       return {
+           events : []
+       }
+   },
    addEvent: function(){
        var reference = this.props.item.reference;
-       var summary = "This is just a test event";
-       var url = 'https://maps.googleapis.com/maps/api/place/' +
-           'event/add/json?sensor=false' +
-           '&key=AIzaSyCTe-g_b5LuoztqQUwandQg_MzInChHtqI';
+       var summaryNode =  this.refs.summary.getDOMNode();
+       var summary = $(summaryNode).val();
+       if (summary === "") {
+           summary = "there is no summary";
+       }
 
        var data =  {
-           summary: "This is a test event",
+           summary: summary,
            reference: reference,
-           duration: 1500,
+           duration: 3000,
            language: "EN-CA"
        };
 
-       $.ajax({
-           type: "POST",
+       this.sendAddEventRequest(data).done(this.handleResponse);
+   },
+   componentDidMount: function() {
+       $(document).on("showBoxDetails", this.updateState);
+   },
+   sendAddEventRequest: function(data) {
+       return $.ajax({
+           type: "GET",
            url: '/createEvent',
-           data: data,
-           success: function(result){
-               console.log("result of post request is");
-               console.log(result);
+           data: data
+       });
+   },
+   getDetails: function(reference){
+       var ref = reference;
+       return $.ajax({
+           type: "GET",
+           url: '/getDetails',
+           data: {
+               reference: ref
            }
        });
    },
+
+   handleResponse: function(response) {
+       if (response && response.result.events && response.result.events.length > 0) {
+           this.setState({
+               events: response.result.events
+           });
+       }
+   },
+
    updateState: function(event, data){
-       console.log("The network details for");
+       var reference = data.reference;
        this.props.item = data;
-       console.log(data);
+       this.getDetails(reference).done(this.handleResponse);
    },
-   componentWillMount: function(){
-     $(document).on("showBoxDetails", this.updateState);
-   },
+
    componentWillUnmount: function(){
      $(document).unbind("showBoxDetails");
    },
    render: function(){
+       if (this.state.events.length > 0){
+           var events = this.state.events.map(function(event){
+               return (<eventItem event={event} />);
+           });
+       }
        return(
          <div>
-             <div>Network Details</div>
+             <ul>
+                {events}
+             </ul>
+             <input type="text" className="summary" ref="summary"></input>
              <button onClick={this.addEvent}>Add Event</button>
          </div>
        );

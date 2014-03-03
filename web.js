@@ -7,9 +7,10 @@ var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 var SITE_SECRET = "keyboard cat";
 var connectUtils = connect.utils;
-var request = require("request");
-var querystring = require("querystring");
+var needle = require('needle');
+
 server.listen(process.env.PORT || 5000);
+
 
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/test');
@@ -24,7 +25,7 @@ var Box = mongoose.model('Box', boxSchema);
 app.configure(function () {
     app.use(connect.cookieParser(SITE_SECRET));
     app.use(express.session({secret: SITE_SECRET, key: 'express.sid'}));
-    app.use("/", express.static(__dirname + '/public'));
+    app.use(express.static(__dirname + '/public'));
     app.use(express.bodyParser());
 });
 
@@ -54,41 +55,52 @@ app.get('/createBox', function(req, res) {
     });
 });
 
-app.post('/createEvent', function(req, res){
-    var ref = req.body.reference;
-    var summary = req.body.summary;
-    var duration = req.body.duration;
-    var language = req.body.language;
+app.get('/createEvent', function(req, res){
+    var ref = req.query.reference;
+    var summary = req.query.summary;
+    var duration = req.query.duration;
 
     var postData = {
-        duration: duration,
+        duration: 1500,
         reference: ref,
         summary: summary
     };
 
-    var body = querystring.stringify(postData);
-
-    var options = {
-        host: 'maps.googleapis.com',
-        port: 443,
-        path: '/maps/api/place/event/add/json?sensor=false&key=AIzaSyAjhVOUqyApek1tdeiyKaZOWdLk4EUYHlM',
-        method: 'POST',
-        headers: {
-            accept : '*/*',
-            'Content-Type' : 'application/json',
-            'Content-Length' : Buffer.byteLength(body)
-        }
-    };
-
-    var myReq = https.request(options, function(res){
-       res.setEncoding('utf8');
-       res.on('data', function(chunk){
-          console.log("body:" + chunk);
-       });
+    res.writeHead(200, {
+        'Content-Type' : 'x-application/json'
     });
 
-    myReq.write(body);
-    myReq.end();
+    needle.post('https://maps.googleapis.com/maps/api/place/event/add/json?sensor=false&key=AIzaSyBspEevznjXmBIgxYwUb1QGoWjv-B8GPlI',
+        postData,
+        {json: true, ssl: true},
+        handleResponse
+    );
+
+    function handleResponse(error, response, body){
+        if (!error && response.statusCode == 200) {
+            console.log(body); // Print the google web page.
+
+            res.end(JSON.stringify(response.body));
+        } else {
+            console.log(error);
+        }
+    }
+});
+
+app.get('/getDetails', function(req, res) {
+    var url = 'https://maps.googleapis.com/maps/api/place/details/json?&reference='+ req.query.reference + '&sensor=false&key=AIzaSyBspEevznjXmBIgxYwUb1QGoWjv-B8GPlI';
+    needle.post(url, {json: true, ssl: true}, callback);
+
+    res.writeHead(200, {
+        'Content-Type' : 'x-application/json'
+    });
+
+    function callback(error, response, body) {
+       if (!error && response.statusCode == 200) {
+           console.log(response);
+           res.end(JSON.stringify(response.body));
+       }
+   };
 });
 
 function getBox(res, id){

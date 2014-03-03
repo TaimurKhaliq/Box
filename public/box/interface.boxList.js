@@ -56,8 +56,6 @@ var boxList = React.createClass({
                 <ul className="box-list">
                 {items}
                 </ul>
-                <div id="google-places">
-                </div>
             </div>
         );
     }
