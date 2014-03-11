@@ -22,8 +22,13 @@ var networkDetails = React.createClass({
 
        this.sendAddEventRequest(data).done(this.handleResponse);
    },
+   componentWillMount: function(){
+    // not sure wether to put this here or after
+    Box.trigger("navBarChange", { screenName: "Network Details" , items: [] });
+   },
    componentDidMount: function() {
        $(document).on("showBoxDetails", this.updateState);
+
    },
    sendAddEventRequest: function(data) {
        return $.ajax({
@@ -42,7 +47,6 @@ var networkDetails = React.createClass({
            }
        });
    },
-
    handleResponse: function(response) {
        if (response && response.result.events && response.result.events.length > 0) {
            this.setState({
@@ -50,13 +54,11 @@ var networkDetails = React.createClass({
            });
        }
    },
-
    updateState: function(event, data){
        var reference = data.reference;
        this.props.item = data;
        this.getDetails(reference).done(this.handleResponse);
    },
-
    componentWillUnmount: function(){
      $(document).unbind("showBoxDetails");
    },

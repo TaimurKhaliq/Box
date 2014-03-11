@@ -1,11 +1,42 @@
 /** @jsx React.DOM */
 var boxList = React.createClass({
+    navItems: [
+        {
+            name:'Home',
+            callback: function(){
+                Box.trigger("navBarClose");
+                homePageRouter.navigate("/", {trigger: true });
+            }
+        },
+        {
+            name:'Box Item Two'
+        },
+        {
+            name:'Box Item Three'
+        }
+    ],
+
+    contextItems: [
+        {
+            name: 'Filter'
+        }
+    ],
+
     getInitialState: function(){
         return {
             longitude: '',
             latitude: '',
             places: []
         }
+    },
+
+    componentWillMount: function(){
+        Box.trigger("navBarChange", {
+            screenName: "Box List" ,
+            items: this.navItems,
+            contextItems: this.contextItems,
+            subNav: true
+        });
     },
 
     componentDidMount: function(){
@@ -19,7 +50,6 @@ var boxList = React.createClass({
                     places: []
                 });
                 self.findNearByPlaces();
-
             });
         }
     },
@@ -27,6 +57,7 @@ var boxList = React.createClass({
     updateState: function(data) {
       this.setState({places: data});
     },
+
     openNetwork: function(){
         homePageRouter.navigate("/openNetwork", {trigger: true });
     },

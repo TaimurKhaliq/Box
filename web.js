@@ -3,6 +3,7 @@ var connect = require('connect');
 var app = express();
 var http = require('http');
 var https = require('https');
+var theSocket;
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 var SITE_SECRET = "keyboard cat";
@@ -29,6 +30,22 @@ app.configure(function () {
     app.use(express.bodyParser());
 });
 
+io.sockets.on('connection', function(socket){
+    var hs = socket.handshake;
+    theSocket = socket;
+
+    socket.on('createBox', function() {
+    });
+
+    socket.on('getBoxData', function(){
+        socket.emit('boxData', { data: [1,2,3,4,5]});
+    });
+
+    socket.on('commentAdded', function(data){
+        // save comment to the box
+        console.log(data);
+    });
+});
 io.set('authorization', function(data, accept){
     if (!data.headers.cookie) {
         return accept('Session cookie required.', false);
@@ -103,6 +120,27 @@ app.get('/getDetails', function(req, res) {
    };
 });
 
+app.post('/sendNotification', function(req, res){
+   var response = req.body.response;
+   var item = req.body.item;
+
+   var postData = {
+       response: response,
+       item: item
+   };
+
+   needle.post('http://localhost:7634/userViewedBusiness',
+        postData,
+        {json: true, ssl: true}
+   );
+});
+
+app.post('/pushNotificationToBrowser', function(req, res) {
+   console.log("RECEIVED PUSH NOTIFICATION REQUEST FROM ADMIN");
+   theSocket.emit("notificationReceived", { response: req.body.notification });
+   res.end(); // end the response
+});
+
 function getBox(res, id){
     var _res = res;
     var _callBack = function(err, data) {
@@ -124,21 +162,7 @@ app.get('/box/:id', function(req, res){
     getBox(res, id);
 });
 
-io.sockets.on('connection', function(socket){
-    var hs = socket.handshake;
 
-    socket.on('createBox', function() {
-    });
-
-    socket.on('getBoxData', function(){
-        socket.emit('boxData', { data: [1,2,3,4,5]});
-    });
-
-    socket.on('commentAdded', function(data){
-        // save comment to the box
-        console.log(data);
-    });
-});
 
 
 

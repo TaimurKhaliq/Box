@@ -4,17 +4,27 @@ html {
 body {
     height: 100%;
     position: relative;
-    background-color: #EEEEEE;
+    background-color: #F0F0F0;
     font-family: "Trebuchet MS";
+    transform: translate3d(0,0,0);
+    transition: left;
+    left: 0px;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
 }
 
 button {
     display: block;
     height: 40px;
-    background-color: #0EB686;
-    color: white;
+
     font-size: 15px;
+
 }
+
+
 
 .center {
     margin: 0 auto;

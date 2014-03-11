@@ -1,12 +1,9 @@
 /** @jsx React.DOM */
 var homeScreen = React.createClass({
+   componentWillMount: function(){
+       Box.trigger("navBarChange", { screenName: "Home" , items: [] });
+   },
    handleClick: function(e){
-
-//       $.ajax({
-//           url: "/createBox",
-//           data: { name: $('.box-name').val() }
-//       });
-
        homePageRouter.navigate("/createBox", {trigger: true });
    },
    findBox: function(){
@@ -14,9 +11,10 @@ var homeScreen = React.createClass({
    },
    render: function(){
        return(
-            <div className="vertical-center">
-                <button className="center width-80 common-vertical-space" onClick={this.handleClick}>Create Box</button>
-                <button className="center width-80" onClick={this.findBox}>Find Box</button>
+            <div>
+                <div className="vertical-center">
+                    <button className="center width-80 homeButton" onClick={this.findBox}>Find Box</button>
+                </div>
             </div>
        );
    }
