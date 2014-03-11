@@ -1,0 +1,72 @@
+html {
+    height: 100%;
+}
+body {
+    height: 100%;
+    position: relative;
+    background-color: #F0F0F0;
+    font-family: "Trebuchet MS";
+    transform: translate3d(0,0,0);
+    transition: left;
+    left: 0px;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+button {
+    display: block;
+    height: 40px;
+
+    font-size: 15px;
+
+}
+
+
+
+.center {
+    margin: 0 auto;
+}
+
+.full-width{
+    width: 100%;
+}
+
+.width-20 {
+    width: 20%;
+}
+
+.width-80 {
+    width: 80%;
+}
+
+.title {
+    text-align: center;
+}
+
+.common-vertical-space {
+    margin-bottom: 1%;
+}
+
+.vertical-center {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+}
+
+.border-box {
+    box-sizing: border-box;
+}
+
+.input-tab {
+    display: inline-block;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.text-input {
+    height: 35px;
+    box-sizing: border-box;
+}

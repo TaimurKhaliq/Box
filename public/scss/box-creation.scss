@@ -1,0 +1,362 @@
+@import "breakpoints";
+button .navBar {
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+
+button .homeButton {
+  border: 1px solid rgb(167, 167, 167);
+  color: black;
+  background-color: white;
+}
+
+ul {
+  li {
+    list-style: none;
+  }
+}
+.name-input {
+  p {
+    width: 30%;
+    display: inline-block;
+    box-sizing: border-box;
+  }
+
+  input {
+    width: 70%;
+    display: inline-block;
+    box-sizing: border-box;
+  }
+}
+
+.box-list{
+  padding:0px; // reseting the default padding
+  margin-top: 2%;
+}
+
+.box-item {
+  list-style: none;
+  height: 75px;
+  border-bottom: 1px solid #ccc8c8;
+  margin-bottom: 3%;
+  position: relative;
+  background-color: #fff;
+  margin-right: 1%;
+  margin-left: 1%;
+//  padding-top: 3px;
+//  padding-bottom: 10px;
+//  padding-left: 3px;
+  //box-shadow: 0 3px 12px rgba(50,50,50,0.10);
+  //border: 1px solid rgb(209, 181, 181);
+  cursor: pointer;
+  box-sizing: border-box;
+  span {
+    line-height: 20px;
+    margin-left: 3%;
+    width: 60%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 12px;
+    font-weight: bold;
+    vertical-align: top;
+  }
+  img {
+    max-height: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    box-shadow: 0 3px 12px rgba(50, 50, 50, 0.3);
+  }
+}
+
+.searchBoxButton{
+  background-color: #0EB686;
+  width: 100%;
+  border: 0px;
+  color: white;
+  box-sizing: border-box;
+  font-weight: bold;
+}
+
+.notificationBox {
+  float: right;
+  border: 1px solid black;
+  width: 30px;
+  height: 30px;
+  background-color: red;
+  cursor: pointer;
+  span {
+    color: white;
+    font-weight: bold;
+    padding-top: 1px;
+    font-size: 20px;
+    text-align: center;
+    height: 100%;
+    width: 50%;
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.screen-title {
+  font-size: 20px;
+  margin-left: 15px;
+  font-weight: normal;
+  font-family: helvetica;
+  color: #3A3A3A;
+  line-height: 30px;
+}
+
+.flyOutTrigger {
+  background-image: url("../images/icon-sprite-2x.png");
+  background-position-x: -438px;
+  background-position-y: -125px;
+  background-color: transparent;
+  position: relative;
+  display: inline-block;
+  height: 30px;
+  width: 35px;
+  vertical-align: middle;
+  border: none;
+}
+
+button:active{
+  border: none;
+  outline: none;
+}
+
+button:visited {
+  border: none;
+  outline: none;
+}
+
+button:hover {
+  border: none;
+  outline: none;
+}
+
+.flyOutList{
+  position: absolute;
+  z-index: 100;
+  height: 100%;
+  padding: 0;
+  left: -215px;
+  width: 200px;
+  background-color: #F0F0F0;
+  border: 1px solid black;
+}
+
+.flyout {
+  transition-property: left;
+  transition: all 0.5s ease;
+  left: 0% !important;
+}
+
+.flyin {
+  transition-property: left;
+  transition: all 0.5s ease;
+  left: -215px !important;
+}
+
+.search {
+  background-image: url('../images/magnifier-on-off.png');
+  background-repeat: no-repeat;
+  background-position-y: -30px;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  float: right;
+}
+
+.MainBar {
+  background-color: white;
+  border: 1px solid rgb(206, 202, 202);
+  padding-right: 1%;
+  padding-left: 1%;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+}
+
+.navbar-item {
+  height: 8%;
+  background-color: white;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+  position: relative;
+
+  span {
+    display: inline-block;
+    text-align: center;
+    text-transform: uppercase;
+    width: 100%;
+    height: 100%;
+    padding-top: 9%;
+  }
+}
+
+.bar {
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  height: 100%;
+  width: 2px;
+  background-color: green;
+}
+
+.redBar {
+  position: absolute;
+  top: 0px;
+  right: 5px;
+  height: 100%;
+  width: 2px;
+  margin-left: 2px;
+  background-color: red;
+}
+
+.blueBar {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  width: 2px;
+  margin-left: 2px;
+  background-color: blue;
+}
+
+.image-container{
+  width: 20%;
+  float: left;
+  box-sizing: border-box;
+}
+
+.metadata {
+  position: relative;
+  width: 80%;
+  height: 100%;
+  float: right;
+  box-sizing: border-box;
+  padding-left:10px;
+
+  .sub-info {
+    font-size: 11px;
+    color: gray;
+    margin-left: 3%;
+  }
+}
+
+.blueBarMenu{
+  position: absolute;
+  left: 7px;
+  height: 100%;
+  background-color: blue;
+  width: 2px;
+  display: inline-block;
+}
+
+.redBarMenu {
+  position: absolute;
+  height: 100%;
+  left: 3px;
+  background-color: red;
+  width: 2px;
+  display: inline-block;
+}
+
+.greenBarMenu {
+  position: absolute;
+  height: 100%;
+  left: 0x;
+  background-color: green;
+  width: 2px;
+  display: inline-block;
+}
+
+.counter {
+  position: absolute;
+  top: 0px;
+  right: 50px;
+  font-size: 46px;
+}
+
+.home-blue-bar {
+  width: 2px;
+  height: 80px;
+  background-color: blue;
+  display: inline-block;
+  position: absolute;
+  left: 49%;
+}
+
+.home-green-bar {
+  width: 2px;
+  height: 80px;
+  background-color: green;
+  display: inline-block;
+  position: absolute;
+  left: 51%;
+}
+
+.home-red-bar {
+  width: 2px;
+  height: 80px;
+  background-color: red;
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+}
+
+.customHeight{
+  height: 42px;
+}
+
+.rightContext {
+  float: right;
+  background-position-x: 11px;
+  top: 2px;
+  background-position-y: 65px;
+}
+
+.rightContextFlyoutList {
+  position: absolute;
+  z-index: 100;
+  height: 100%;
+  padding: 0;
+  right: -215px;
+  width: 200px;
+  background-color: #F0F0F0;
+  border: 1px solid black;
+}
+
+.ctx-flyout{
+  transition-property: right;
+  transition: all 0.5s ease;
+  right: 0% !important;
+}
+
+.ctx-flyin {
+  transition-property: right;
+  transition: all 0.5s ease;
+  right: -215px !important;
+}
+
+.subNav {
+  margin-top: 10px;
+  width: 100%;
+}
+
+.searchBox {
+  width: 100%;
+  input {
+    width: 99%;
+    height: 25px;
+  }
+}
+
+.pac-container {
+  left: 0px !important;
+}

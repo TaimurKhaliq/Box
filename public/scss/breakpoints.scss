@@ -1,0 +1,79 @@
+$smallSize: 568px;
+$smallSizeMin: $smallSize + 1;
+$mediumSize: 880px;
+$mediumSizeMin: $mediumSize + 1;
+$largeSize: 1140px;
+$largeSizeMin: $largeSize + 1;
+$jumboSize: 1600px;
+
+$smallBreakpoint: "all and (max-width: " + $smallSize + ")";
+$smallAndMediumBreakpoint: "all and (max-width: " + $mediumSize + ")";
+$mediumBreakpoint: "all and (min-width: " + $smallSizeMin + ") and (max-width: " + $mediumSize + ")";
+$largeBreakpoint: "all and (min-width: " + $mediumSizeMin + ") and (max-width: " + $largeSize + ")";
+$largeAndJumboBreakpoint: "all and (min-width: " + $mediumSizeMin + ")";
+$jumboBreakpoint: "all and (min-width: " + $largeSizeMin + ")";
+
+$mediumAndLargeAndJumboBreakpoint: "all and (min-width: " + $smallSizeMin + ")";
+
+$retinaBreakpoint: "all and (-webkit-min-device-pixel-ratio: 1.5), (-o-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5), (min-resolution: 144dpi), (min-resolution: 1.5dppx)";
+
+
+// Mixin for small breakpoints
+
+@mixin smallBreakpoint() {
+  @media #{$smallBreakpoint} {
+    @content;
+  }
+}
+
+@mixin smallAndMediumBreakpoint() {
+  @media #{$smallAndMediumBreakpoint} {
+    @content;
+  }
+}
+
+// Mixin for medium breakpoints
+
+@mixin mediumBreakpoint() {
+  @media #{$mediumBreakpoint} {
+    @content;
+  }
+}
+
+// Mixin for large breakpoints
+
+@mixin largeBreakpoint() {
+  @media #{$largeBreakpoint} {
+    @content;
+  }
+}
+
+@mixin largeAndJumboBreakpoint() {
+  @media #{$largeAndJumboBreakpoint} {
+    @content;
+  }
+}
+
+
+@mixin mediumAndLargeAndJumboBreakpoint() {
+  @media #{$mediumAndLargeAndJumboBreakpoint} {
+    @content;
+  }
+}
+
+// Mixin theoretically for tv screens
+// TODO: needs to be tested (out of scope)
+
+@mixin jumboBreakpoint() {
+  @media #{$jumboBreakpoint} {
+    @content;
+  }
+}
+
+// Mixin for retina breakpoints
+
+@mixin retinaBreakpoint() {
+  @media #{$retinaBreakpoint} {
+    @content;
+  }
+}
